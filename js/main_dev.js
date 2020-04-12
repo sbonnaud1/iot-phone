@@ -54,12 +54,12 @@ function commandFun(command, format, payload) {
     }
 }
 function devicemotionFun(event) {
-	x = event.acceleration.x;
-	y = event.acceleration.y;
-	z = event.acceleration.z;
-	document.getElementById("x").textContent = x;
-	document.getElementById("y").textContent = y;
-	document.getElementById("z").textContent = z;
+	ax = event.acceleration.x;
+	ay = event.acceleration.y;
+	az = event.acceleration.z;
+	document.getElementById("x").textContent = ax.toFixed(2);;
+	document.getElementById("y").textContent = ay.toFixed(2);;
+	document.getElementById("z").textContent = az.toFixed(2);;
 	// client.publish(evt, "json", event_as_json_string, qos);
 	client.publish(
 		"a",
