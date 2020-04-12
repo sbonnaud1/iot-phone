@@ -16,7 +16,7 @@ function trace(text) {
 	document.getElementById("log").textContent = text;
 }
 function throttle(fun, interval) {
-	let enable = true;
+	let enable = false;
 	return function(...args) {
 		if (!enable) return;
 		enable = false;
