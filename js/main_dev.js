@@ -54,9 +54,9 @@ function commandFun(command, format, payload) {
     }
 }
 function devicemotionFun(event) {
-	ax = event.acceleration.x;
-	ay = event.acceleration.y;
-	az = event.acceleration.z;
+	ax = event.accelerationIncludingGravity.x;
+	ay = event.accelerationIncludingGravity.y;
+	az = event.accelerationIncludingGravity.z;
 	document.getElementById("x").textContent = ax.toFixed(2);;
 	document.getElementById("y").textContent = ay.toFixed(2);;
 	document.getElementById("z").textContent = az.toFixed(2);;
@@ -72,9 +72,9 @@ function deviceorientationFun(event) {
 	rotateDegrees = event.alpha; // rotation around z-axis
 	leftToRight = event.gamma; // left to right around y-axis
 	frontToBack = event.beta; // front back motion around x-axis
-	document.getElementById("alpha").textContent = rotateDegrees;
-	document.getElementById("beta").textContent = frontToBack;
-	document.getElementById("gamma").textContent = leftToRight;
+	document.getElementById("Alpha").textContent = rotateDegrees;
+	document.getElementById("Beta").textContent = frontToBack;
+	document.getElementById("Gamma").textContent = leftToRight;
 	// client.publish(evt, "json", event_as_json_string, qos);
 	client.publish(
 		"o",
@@ -83,9 +83,22 @@ function deviceorientationFun(event) {
 		qos
 	);
 }
-function connectFun() {
-    window.addEventListener('devicemotion', throttle(devicemotionFun, throttleInterval), true);
+function connectFun() {	
+    if(window.DeviceOrientationEvent) {
     window.addEventListener('deviceorientation', throttle(deviceorientationFun, throttleInterval), true);
+     
+   } else {
+     // Le navigateur ne supporte pas l'événement deviceorientation
+     trace('Pas de support de DeviceOrientationEvent');
+     console.log("DeviceOrientation is not supported");
+   }
+   
+   if(window.DeviceMotionEvent) {
+     window.addEventListener('devicemotion', throttle(devicemotionFun, throttleInterval), true);
+   } else {
+     // Le navigateur ne supporte pas l'événement devicemotion
+     trace('Pas de support de DeviceMotionEvent');
+   }
 }
 
 // ---------------------------------------------------------------------------
