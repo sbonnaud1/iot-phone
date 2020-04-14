@@ -6,6 +6,5 @@ var dev_auth_token   = "_mOjoj4Quk4PhJ@Vt9"; // replace with your device token
 var qos              = 2; // see
 // <https://www.ibm.com/support/knowledgecenter/SSQP8H/iot/platform/reference/mqtt/index.html>
 
-var disconnect_after = 60; // (in seconds)
+var disconnect_after = 120; // (in seconds)
 var throttleInterval = 1000; // (in milliseconds)
-
